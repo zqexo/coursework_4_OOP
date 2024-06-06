@@ -1,37 +1,28 @@
 from abc import ABC, abstractmethod
+import requests
 
 
-class Abstract(ABC):
-
+class BaseAPI(ABC):
     @abstractmethod
-    def __init__(self):
-        pass
-
-    @abstractmethod
-    def __parsing__(self):
+    def get_vacancies(self, keyword):
         pass
 
 
-class Parser(Abstract):
-    def __init__(self):
-        pass
-
-    def __parsing__(self):
-        pass
-
-    def cast_to_object_list(self):
-        """Преобразование набора данных из JSON в список объектов"""
-        pass
-
-
-class HeadHunterAPI(Parser):
+class HHApi(BaseAPI):
 
     def __init__(self):
-        super().__init__()
+        self.base_url = 'https://api.hh.ru/vacancies'
+        self.headers = {'User-Agent': 'HH-User-Agent'}
+        self.params = {'per_page': 100}
+        self.vacancies = []
 
-    def __parsing__(self):
-        pass
-
-    def get_vacancies(self):
+    def get_vacancies(self, keyword):
         """Получаем данные в формате json"""
-        pass
+        self.params.update({'text': keyword})
+        response = requests.get(self.base_url, params=self.params)
+        return response.json()['items']
+
+
+if __name__ == '__main__':
+    api_requests = HHApi()
+    api_requests.get_vacancies('крановщик')
