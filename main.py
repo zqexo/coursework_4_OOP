@@ -1,51 +1,31 @@
-import json
-import os
+from src.hh_api import HHAPI
+from src.fileworker import JSONWorker
+from src.vacancy import Vacancy
+from src.utils import filter_vacancies, get_vacancies_by_salary, sort_vacancies, get_top_vacancies, print_vacancies
 
 
-class Vacancy:
-    def __init__(self, salary_from, salary_to):
-        self.salary_from = salary_from
-        self.salary_to = salary_to
+def user_interaction():
+    hh_api = HHAPI()
+    json_worker = JSONWorker('vacancies.json')
 
-    def __repr__(self):
-        return f'Я вакансия, моя зп от: {self.salary_from}'
+    search_query = input("Введите поисковый запрос: ")
+    top_n = int(input("Введите количество вакансий для вывода в топ N: "))
+    filter_words = input("Введите ключевые слова для фильтрации вакансий: ").split()
+    salary_range = input("Введите диапазон зарплат: ")  # Пример: 100000 - 150000
 
-    def __lt__(self, other):
-        return self.salary_from < other.salary_from
+    hh_vacancies = hh_api.get_vacancies(search_query)
+    vacancies_list = Vacancy.create_vacancies(hh_vacancies)
 
-    def to_json(self):
-        return {
-            'salary_from': self.salary_from,
-            'salary_to': self.salary_to,
-        }
+    for vacancy in vacancies_list:
+        json_worker.add_vacancy(vacancy)
 
+    filtered_vacancies = filter_vacancies(vacancies_list, filter_words)
+    ranged_vacancies = get_vacancies_by_salary(filtered_vacancies, salary_range)
+    sorted_vacancies = sort_vacancies(ranged_vacancies)
+    top_vacancies = get_top_vacancies(sorted_vacancies, top_n)
 
-class JSONWorker():
-    def __init__(self, file_name: str):
-        # упрощённо -- надо иди с корневой директории
-        self.path = os.path.join('data', file_name)
-
-    def add_vacancy(self, vacancy: Vacancy):
-        vac_info = vacancy.to_json()
-        content = self.read_file()
-        content.append(vac_info)
-        self.write_file(content)
-    def read_file(self):
-        with open(self.path) as file:
-            return json.load(file)
-
-    def write_file(self, data):
-        with open(self.path, 'a') as file:
-            json.dump(data, file, indent=4, ensure_ascii=False)
+    print_vacancies(top_vacancies)
 
 
-first = Vacancy(25000, 50000)
-second = Vacancy(30000, 60000)
-third = Vacancy(15000, 40000)
-
-vacancies = [first, second, third]
-result = sorted(vacancies)
-print(result)
-
-json_worker = JSONWorker('vacancies.json')
-json_worker.add_vacancy(third)
+if __name__ == "__main__":
+    user_interaction()
