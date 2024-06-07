@@ -1,7 +1,12 @@
+"""
+Основной файл программы, в котором находится точка входа.
+"""
+
 from src.hh_api import HHAPI
 from src.fileworker import JSONWorker
 from src.vacancy import Vacancy
 from src.utils import filter_vacancies, get_vacancies_by_salary, sort_vacancies, get_top_vacancies, print_vacancies
+
 
 def user_interaction():
     hh_api = HHAPI()
@@ -24,6 +29,7 @@ def user_interaction():
     top_vacancies = get_top_vacancies(sorted_vacancies, top_n)
 
     print_vacancies(top_vacancies)
+
 
 if __name__ == "__main__":
     user_interaction()

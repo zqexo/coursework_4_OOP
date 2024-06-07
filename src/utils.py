@@ -1,3 +1,7 @@
+"""
+Функции для взаимодействия с пользователем через консоль.
+"""
+
 def filter_vacancies(vacancies, keywords):
     return [vac for vac in vacancies if any(word in vac.name for word in keywords)]
 

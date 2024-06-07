@@ -1,4 +1,8 @@
 class Vacancy:
+    """
+    Класс для представления информации о вакансии.
+    """
+
     def __init__(self, name, url, salary_from, salary_to, city, experience):
         self.name = name
         self.url = url
@@ -15,6 +19,7 @@ class Vacancy:
 
     @classmethod
     def create_vacancies(cls, data):
+
         instances = []
         for vac_info in data:
             salary_info = vac_info.get('salary')

@@ -3,6 +3,7 @@ import json
 import os
 from src.vacancy import Vacancy
 
+
 class FileWorker(ABC):
     @abstractmethod
     def add_vacancy(self, vacancy):
@@ -16,7 +17,12 @@ class FileWorker(ABC):
     def delete_vacancy(self, vacancy):
         pass
 
+
 class JSONWorker(FileWorker):
+    """
+    Класс для работы с JSON-файлами.
+    """
+
     def __init__(self, file_name: str):
         self.path = os.path.join('data', file_name)
 
