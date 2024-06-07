@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 import json
 import os
-from vacancy import Vacancy
+from src.vacancy import Vacancy
 
 class FileWorker(ABC):
     @abstractmethod
