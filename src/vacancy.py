@@ -1,6 +1,6 @@
 class Vacancy:
     """
-    ����� ��� ������������� ���������� � ��������.
+    Класс для представления информации о вакансии.
     """
 
     def __init__(self, name, url, salary_from, salary_to, city, experience):
@@ -15,11 +15,16 @@ class Vacancy:
         return f'{self.name} ({self.salary_from}-{self.salary_to})'
 
     def __lt__(self, other):
+        """
+        Сравнение зарплат по величине
+        """
         return self.salary_from < other.salary_from
 
     @classmethod
     def create_vacancies(cls, data):
-
+        """
+        Получение данных о вакансии.
+        """
         instances = []
         for vac_info in data:
             salary_info = vac_info.get('salary')

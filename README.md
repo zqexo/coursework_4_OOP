@@ -12,7 +12,13 @@
 ## Требования к установке
 
 - Python 3.x
-- Установка зависимостей: `pip install -r requirements.txt`
+- [Poetry](https://python-poetry.org/)
+
+## Установка
+
+1. Клонируйте репозиторий: `git clone https://github.com/zqexo/coursework_4_OOP.git`
+2. Установка зависимостей: `poetry install`
+3. Активируйте виртуальную среду: `poetry shell`
 
 ## Как использовать
 
@@ -25,7 +31,7 @@
 ```python
 # Пример использования программы
 
-from src.main import user_interaction
+from main import user_interaction
 
 if __name__ == "__main__":
     user_interaction()

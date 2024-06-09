@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/fileworker.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/hh_api.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/utils.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/vacancy.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tests/test_fileworker.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tests/test_hh_api.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tests/test_utils.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tests/test_vacancy.py" charset="UTF-8" />
     <file url="PROJECT" charset="windows-1251" />
   </component>
 </project>
